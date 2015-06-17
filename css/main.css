@@ -1,0 +1,326 @@
+/* #Reset & Basics (Inspired by E. Meyers)
+================================================== */
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* #Basic Styles
+================================================== */
+body {
+  background: #fff;
+  font-size: 14px;
+  font-family: "futura-pt",sans-serif;
+  line-height: 1.6;
+  color: #333;
+  -webkit-font-smoothing: antialiased;
+  /* Fix for webkit rendering */
+  -webkit-text-size-adjust: 100%;
+}
+
+form, input {
+  font-family: "futura-pt",sans-serif;
+}
+
+/* #Typography
+================================================== */
+h1, h2, h3, h4, h5, h6 {
+  color: #111;
+  font-weight: bold;
+  font-family: "futura-pt-condensed",sans-serif;
+}
+
+h1 {
+  font-size: 60px;
+  line-height: 1.1;
+}
+
+h2 {
+  font-size: 48px;
+  line-height: 1.2;
+}
+
+h3 {
+  font-size: 36px;
+  line-height: 1.3;
+}
+
+h4 {
+  font-size: 24px;
+  line-height: 1.4;
+}
+
+h5 {
+  font-size: 21px;
+  line-height: 1.5;
+}
+
+h6 {
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+p {
+  margin: 0 0 20px 0;
+}
+
+em {
+  font-style: italic;
+}
+
+strong {
+  font-weight: bold;
+}
+
+hr {
+  border: solid #ddd;
+  border-width: 1px 0 0;
+  clear: both;
+  margin: 10px 0 30px;
+  height: 0;
+}
+
+/* #Links
+================================================== */
+a {
+  color: #333;
+  text-decoration: underline;
+  outline: 0;
+}
+
+a:hover, a:focus {
+  color: #000;
+}
+
+body {
+  background-image: url(../img/bg.jpg);
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+body main {
+  margin-left: 200px;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+body h1 {
+  text-transform: uppercase;
+  font-size: 110px;
+  order: -1;
+}
+body span {
+  color: #f8d902;
+  display: inline-block;
+  background-color: black;
+  margin-bottom: 5px;
+  padding: 0 0.2em;
+  transition: all 100ms ease-in-out;
+}
+body .cta {
+  display: inline-block;
+  color: black;
+  background-color: #f8d902;
+  text-decoration: none;
+  font-size: 30px;
+  text-transform: uppercase;
+  padding: 0 0.4em;
+  position: relative;
+  transition: all 100ms ease-in-out;
+}
+body .cta .ion-chevron-right {
+  font-size: 0.8em;
+  margin-left: 0.2em;
+}
+body .cta:hover {
+  color: #f8d902;
+  background-color: black;
+}
+body .cta:hover ~ h1 span {
+  color: black;
+  background-color: #f8d902;
+}
+@media (max-width: 740px) {
+  body main {
+    margin-left: 0;
+  }
+  body h1 {
+    font-size: 60px;
+  }
+  body .cta {
+    font-size: 20px;
+  }
+}
+@media (max-width: 650px) {
+  body main {
+    margin-left: 0;
+  }
+  body h1 {
+    font-size: 50px;
+  }
+  body .cta {
+    font-size: 16px;
+  }
+}
+body .overlay {
+  height: 100vh;
+  position: absolute;
+  background: rgba(248, 217, 2, 0.95);
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 300ms ease-in-out;
+}
+body .overlay.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+body .overlay.is-open .modal {
+  transform: translate(0px, 0px);
+}
+body .overlay .modal {
+  transform: translate(0px, -100px);
+  transition: all 500ms cubic-bezier(0.59, -0.1, 0.31, 1.57);
+  max-width: 600px;
+  background: white;
+  padding: 30px;
+  box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.4);
+  position: relative;
+}
+body .overlay .modal .close-btn {
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  height: 30px;
+  width: 30px;
+  font-size: 30px;
+  text-align: center;
+  line-height: 30px;
+  cursor: pointer;
+  transition: all 100ms ease-in-out;
+}
+body .overlay .modal .close-btn:hover {
+  transform: scale(1.2);
+}
+body .overlay .modal .text-box {
+  max-width: 50%;
+}
+body .overlay .modal .text-box .lead {
+  color: black;
+  font-size: 30px;
+  line-height: 1.3;
+}
+body .overlay .modal .text-box p {
+  color: #999999;
+  font-size: 18px;
+}
+body .overlay .modal .graphic {
+  background: url(../img/presentation.png) bottom left;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 256px;
+  height: 290px;
+}
+body .overlay .modal form {
+  position: relative;
+  z-index: 2;
+  background: black;
+  padding: 20px;
+  margin: 60px -30px -30px;
+  display: flex;
+}
+body .overlay .modal form input {
+  height: 60px;
+  border: none;
+  display: inline-block;
+  padding: 0 30px;
+  font-size: 18px;
+}
+body .overlay .modal form input:focus {
+  outline: none;
+  box-shadow: 0px 0px 0px 2px #f8d902 inset;
+}
+body .overlay .modal form input[type="text"] {
+  flex: 1;
+}
+body .overlay .modal form input[type="submit"] {
+  background: #f8d902;
+  margin-left: 10px;
+  text-transform: uppercase;
+}
+@media (max-width: 720px) {
+  body .overlay .modal {
+    margin: 10px;
+  }
+  body .overlay .modal .close-btn {
+    right: 0;
+  }
+}
+@media (max-width: 650px) {
+  body .overlay .modal form {
+    margin-top: 40px;
+  }
+}
+@media (max-width: 580px) {
+  body .overlay .modal .text-box {
+    max-width: 100%;
+  }
+  body .overlay .modal .graphic {
+    display: none;
+  }
+  body .overlay .modal form {
+    flex-direction: column;
+    margin-top: 20px;
+  }
+  body .overlay .modal form input[type="text"] {
+    margin-left: 10px;
+    margin-bottom: 5px;
+  }
+}
+@media (max-width: 320px) {
+  body .overlay .modal .text-box .lead {
+    font-size: 25px;
+  }
+}
